@@ -8,18 +8,17 @@ def fetch_data(option):
     response.raise_for_status()
 
     data = response.json()
-    print(f"Able to access {len(data)} items of data.")
+    print(f"Successfully fetched {len(data)} entities")
   except requests.HTTPError as e:
-    print("Unable to access data")
+    print(f"Error retrieving data due to {e}")
     return None
 
   return data
+ 
 
-option = input("What Star Wars data would you like to explore? ").strip().lower()
-data = fetch_data(option)
-
+data = fetch_data("people")
 if data:
-  for item in data:
-    print(item["name"])
+  for element in data:
+    print(element["name"])
 else:
-    print("Unable to download data")
+  print("Unable to download data")
